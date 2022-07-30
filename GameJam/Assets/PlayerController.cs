@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector2(rb.velocity.x, fallingSpeed);  
     }
     private void IncreaseSpeedFalling (){
-        if (fallingSpeed > maxFallingSpeed/2)
+        if (fallingSpeed > maxFallingSpeed)
         {
             if (speedIncreaseTimer > 0f)
             {
