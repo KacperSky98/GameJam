@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float fallingSpeed = -10;
-    [SerializeField] private float maxFallingSpeed = -55;
-    [SerializeField] private float valueOfIncreasingSpeed = 0.1f;
-    [SerializeField] private float movementSpeed = 10f;
+    [SerializeField] private float fallingSpeed = -10f;
+    [SerializeField] private float maxFallingSpeed = -50f;
+    [SerializeField] private float valueOfIncreasingSpeed = 1.5f;
+    [SerializeField] private float movementSpeed = 13f;
     private static float fallingSpeedIncreaseTimer = 1f;
     private float speedIncreaseTimer = fallingSpeedIncreaseTimer;
 
@@ -23,17 +23,27 @@ public class PlayerController : MonoBehaviour
     private static float boostTime = 3f;
     private float currentBoostTime = boostTime;
 
+    private float bounceForce = 40f;
+    private bool isBounced = false;
+    private static float bounceSpeed = 0.5f;
+    private float currentBounceSpeed = bounceSpeed;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        rb.gravityScale = 0f;
         maxCoins = GameObject.FindGameObjectsWithTag("Coin").Length;
     }
     void Update()
     {
         Falling();
         IncreaseSpeedFalling();
-        Moving();
+        if (!isBounced)
+        {
+            Moving();
+        }
         BoostController();
+        BounceController();
     }
     private void Falling() {
         rb.velocity = new Vector2(rb.velocity.x, fallingSpeed);
@@ -77,6 +87,18 @@ public class PlayerController : MonoBehaviour
             }
         }    
     }
+    private void BounceController() {
+        if (isBounced) {
+            if (currentBounceSpeed > 0f)
+            {
+                currentBounceSpeed -= Time.deltaTime;
+            }
+            else {
+                isBounced = false;
+                currentBounceSpeed = bounceSpeed;
+            }            
+        }
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("Kolizja");
@@ -91,6 +113,15 @@ public class PlayerController : MonoBehaviour
                     currentCoinsForUpgrade = coinsForUpgrade;
                 }
             }
+        }
+        if (other.CompareTag("Bounce")) {
+            if (other.transform.position.x < this.transform.position.x) {
+                isBounced = true;
+                rb.AddForce(new Vector2(bounceForce,0f), ForceMode2D.Impulse);
+            }        
+        }
+        if (other.CompareTag("Stop")) { 
+        
         }
     }
 

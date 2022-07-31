@@ -168,6 +168,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -1264,6 +1265,55 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      SideWalls_32: -1883263208214606626
+      SideWalls_15: -7992483555013406320
+      SideWalls_21: -1662212447011580629
+      SideWalls_24: -7169083157250952078
+      SideWalls_29: -7313468209911827358
+      SideWalls_34: 211375378408176499
+      SideWalls_10: 6209357892183777609
+      SideWalls_46: 5012408414721904396
+      SideWalls_42: 445621543220952457
+      SideWalls_44: 8683506462488615701
+      SideWalls_22: -4308481358830478011
+      SideWalls_43: -6950405092753222691
+      SideWalls_16: -1427572391643666533
+      SideWalls_38: -3718494133099761909
+      SideWalls_3: -4357970838305120944
+      SideWalls_39: 6763180657812639472
+      SideWalls_31: -26615867658408888
+      SideWalls_6: -3504615582842722725
+      SideWalls_35: 298629521253838523
+      SideWalls_20: -2319523984611393115
+      SideWalls_40: -8870484049421372319
+      SideWalls_18: -9201911689459611006
+      SideWalls_37: 1177757298784123685
+      SideWalls_13: 113975578925314510
+      SideWalls_27: 1170357366800761806
+      SideWalls_28: 7974277883798234953
+      SideWalls_23: -2263003808744004578
+      SideWalls_19: -603785824582552741
+      SideWalls_4: 1766253464374417970
+      SideWalls_47: -4008757169135738850
+      SideWalls_9: 9223007330518960812
+      SideWalls_33: -3323923401946029230
+      SideWalls_30: 5011727612404150129
+      SideWalls_26: 8085363401929286421
+      SideWalls_2: -8797686746112481254
+      SideWalls_45: -6585148244125114742
+      SideWalls_5: -8397958555458605988
+      SideWalls_41: 4885782052213537616
+      SideWalls_12: 315953399240580810
+      SideWalls_1: 236985483063277158
+      SideWalls_7: -7547787988313029336
+      SideWalls_11: -3050283842613133638
+      SideWalls_0: 1679252132224080802
+      SideWalls_25: 8898442309258932644
+      SideWalls_36: -9162609280246731706
+      SideWalls_17: -979815923504840119
+      SideWalls_8: -4790529633279371231
+      SideWalls_14: 7302621206569315107
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
