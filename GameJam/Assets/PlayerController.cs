@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float fallingSpeed = -10f;
+    [SerializeField] private float baseFallingSpeed = -10f;
+    private float realFallingSpeed;
     [SerializeField] private float maxFallingSpeed = -50f;
     [SerializeField] private float valueOfIncreasingSpeed = 1.5f;
     [SerializeField] private float movementSpeed = 13f;
@@ -14,42 +15,69 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private float horizontalMove = 0f;
 
+    //Coins
     private int maxCoins = 0;
-    private int collectedCoins = 0;
-    private static int coinsForUpgrade = 5;
-    private int currentCoinsForUpgrade = coinsForUpgrade;
+    public int collectedCoins = 0;
+    public int coinsForUpgrade = 5;
+    public int currentCoinsForUpgrade;
 
-    private bool duringBoost = false;
+    //Boost Time
+    public bool duringBoost = false;
     private static float boostTime = 3f;
     private float currentBoostTime = boostTime;
 
+    //Bounce
     private float bounceForce = 40f;
     private bool isBounced = false;
     private static float bounceSpeed = 0.5f;
     private float currentBounceSpeed = bounceSpeed;
 
+    //Boost Controllers
+    public bool slowActive = false;
+    public bool magnetActive = false;
+    public bool accelerateActive = false;
+    [SerializeField] CoinCatchController coinCatch;
+
+    //Death
+    private bool isDead = false;
+
+
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        currentCoinsForUpgrade = coinsForUpgrade;
+        rb = gameObject.GetComponentInParent< Rigidbody2D>();
         rb.gravityScale = 0f;
         maxCoins = GameObject.FindGameObjectsWithTag("Coin").Length;
     }
     void Update()
     {
-        Falling();
-        IncreaseSpeedFalling();
-        if (!isBounced)
-        {
-            Moving();
+        if (!isDead) {
+            Falling();
+            IncreaseSpeedFalling();
+            if (!isBounced)
+            {
+                Moving();
+            }
+            BoostController();
+            BounceController(); 
         }
-        BoostController();
-        BounceController();
     }
     private void Falling() {
-        rb.velocity = new Vector2(rb.velocity.x, fallingSpeed);
+        if (accelerateActive)
+        {
+            realFallingSpeed = baseFallingSpeed * 1.3f;
+        }
+        else if (slowActive)
+        {
+            realFallingSpeed = baseFallingSpeed * 0.5f;
+        }
+        else {
+            realFallingSpeed = baseFallingSpeed;
+        }
+        rb.velocity = new Vector2(rb.velocity.x, realFallingSpeed);
     }
     private void IncreaseSpeedFalling() {
-        if (fallingSpeed > maxFallingSpeed)
+        if (baseFallingSpeed > maxFallingSpeed)
         {
             if (speedIncreaseTimer > 0f)
             {
@@ -57,12 +85,12 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                fallingSpeed -= valueOfIncreasingSpeed;
+                baseFallingSpeed -= valueOfIncreasingSpeed;
                 speedIncreaseTimer = fallingSpeedIncreaseTimer;
             }
         }
         else {
-            fallingSpeed = maxFallingSpeed;
+            baseFallingSpeed = maxFallingSpeed;
             Debug.Log(this.transform.position.y);
         }
     }
@@ -70,9 +98,31 @@ public class PlayerController : MonoBehaviour
         horizontalMove = Input.GetAxisRaw("Horizontal") * movementSpeed;
         rb.velocity = new Vector2(horizontalMove, rb.velocity.y);
     }
-    private void SetBoost() {
+    public void SetBoost() {
         duringBoost = true;
         //Tu dzieje siê magia 
+        var number = Random.Range(1, 100);
+        if (number <= 33)
+        {
+            CoinMagnet();
+        }
+        else if (number > 33 && number <= 66)
+        {
+            Accelerate();
+        }
+        else {
+            Slow();
+        }
+    }
+    private void CoinMagnet() {
+        magnetActive = true;
+        coinCatch.GetComponent<CircleCollider2D>().radius = 2f;
+    }
+    private void Accelerate() {
+        accelerateActive = true;
+    }
+    private void Slow() {
+        slowActive = true;
     }
     private void BoostController() {
         if (duringBoost) {
@@ -83,6 +133,18 @@ public class PlayerController : MonoBehaviour
             else {
                 currentBoostTime = boostTime;
                 duringBoost = false;
+                if (accelerateActive)
+                {
+                    accelerateActive = false;
+                }
+                else if (slowActive)
+                {
+                    slowActive = false;
+                }
+                else {
+                    magnetActive = false;
+                    coinCatch.GetComponent<CircleCollider2D>().radius = 0.6f;
+                }
                 Debug.Log("Koniec boosta");
             }
         }    
@@ -102,26 +164,14 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("Kolizja");
-        if (other.CompareTag("Coin")) {
-            Destroy(other.gameObject);
-            collectedCoins++;
-            if (!duringBoost) {
-                currentCoinsForUpgrade--;
-                if (currentCoinsForUpgrade == 0) {
-                    Debug.Log("Dostajesz boosta");
-                    SetBoost();
-                    currentCoinsForUpgrade = coinsForUpgrade;
-                }
-            }
-        }
         if (other.CompareTag("Bounce")) {
             if (other.transform.position.x < this.transform.position.x) {
                 isBounced = true;
                 rb.AddForce(new Vector2(bounceForce,0f), ForceMode2D.Impulse);
             }        
         }
-        if (other.CompareTag("Stop")) { 
-        
+        if (other.CompareTag("Stop")) {
+            Debug.Log("GameOver");        
         }
     }
 
