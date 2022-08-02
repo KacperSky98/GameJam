@@ -106,14 +106,14 @@ public class PlayerController : MonoBehaviour
         var number = Random.Range(1, 100);
         if (number <= 33)
         {
-            Slow();
+            Accelerate();
         }
         else if (number > 33 && number <= 66)
         {
             Slow();
         }
         else {
-            Slow();
+            CoinMagnet();
         }
     }
     private void CoinMagnet() {
