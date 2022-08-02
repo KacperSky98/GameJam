@@ -106,19 +106,27 @@ public class PlayerController : MonoBehaviour
         var number = Random.Range(1, 100);
         if (number <= 33)
         {
-            Accelerate();
+            Slow();
         }
         else if (number > 33 && number <= 66)
         {
-            Accelerate();
+            Slow();
         }
         else {
-            Accelerate();
+            Slow();
         }
     }
     private void CoinMagnet() {
-        magnetActive = true;
-        coinCatch.GetComponent<CircleCollider2D>().radius = 2f;
+        if (!magnetActive)
+        {
+            magnetActive = true;
+            coinCatch.GetComponent<CircleCollider2D>().radius = 2f;
+        }
+        else {
+            magnetActive = false;
+            coinCatch.GetComponent<CircleCollider2D>().radius = 0.6f;
+        }
+        animator.SetTrigger("Magnet");
     }
     private void Accelerate() {
         if (!accelerateActive)
@@ -158,8 +166,7 @@ public class PlayerController : MonoBehaviour
                     Slow();
                 }
                 else {
-                    magnetActive = false;
-                    coinCatch.GetComponent<CircleCollider2D>().radius = 0.6f;
+                    CoinMagnet();
                 }
                 Debug.Log("Koniec boosta");
             }
