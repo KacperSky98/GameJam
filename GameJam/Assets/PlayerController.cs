@@ -44,6 +44,10 @@ public class PlayerController : MonoBehaviour
     //Animator
     [SerializeField] Animator animator;
 
+    //Slow Terrain
+    private bool onSlowTerrain = false;
+    [SerializeField] private float slowValue = 0.3f;
+
     void Start()
     {
         currentCoinsForUpgrade = coinsForUpgrade;
@@ -75,6 +79,9 @@ public class PlayerController : MonoBehaviour
         }
         else {
             realFallingSpeed = baseFallingSpeed;
+        }
+        if (onSlowTerrain) {
+            realFallingSpeed *= slowValue;
         }
         rb.velocity = new Vector2(rb.velocity.x, realFallingSpeed);
     }
@@ -120,11 +127,11 @@ public class PlayerController : MonoBehaviour
         if (!magnetActive)
         {
             magnetActive = true;
-            coinCatch.GetComponent<CircleCollider2D>().radius = 2f;
+            coinCatch.GetComponent<CircleCollider2D>().radius = 1f;
         }
         else {
             magnetActive = false;
-            coinCatch.GetComponent<CircleCollider2D>().radius = 0.6f;
+            coinCatch.GetComponent<CircleCollider2D>().radius = 0.35f;
         }
         animator.SetTrigger("Magnet");
     }
@@ -195,6 +202,15 @@ public class PlayerController : MonoBehaviour
         }
         if (other.CompareTag("Stop")) {
             Debug.Log("GameOver");        
+        }
+        if (other.CompareTag("SlowTerrain")) {
+            onSlowTerrain = true;    
+        }
+    }
+    private void OnTriggerExit2D(Collider2D other) {
+        if (other.CompareTag("SlowTerrain"))
+        {
+            onSlowTerrain = false;
         }
     }
 
