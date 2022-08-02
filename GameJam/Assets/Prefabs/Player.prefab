@@ -67,6 +67,8 @@ GameObject:
   - component: {fileID: 5894393487817720041}
   - component: {fileID: 1134519130317200381}
   - component: {fileID: 351237446051757392}
+  - component: {fileID: 7799880340869475208}
+  - component: {fileID: 7377760278162464835}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -130,7 +132,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -2311659948842064771, guid: ebe27a7cd8154b340ad6925c16787e8f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -161,7 +163,11 @@ MonoBehaviour:
   coinsForUpgrade: 5
   currentCoinsForUpgrade: 0
   duringBoost: 0
+  slowActive: 0
+  magnetActive: 0
+  accelerateActive: 0
   coinCatch: {fileID: 8609454363005118111}
+  animator: {fileID: 7377760278162464835}
 --- !u!61 &351237446051757392
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -188,6 +194,41 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!111 &7799880340869475208
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2526597662633733827}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 0}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!95 &7377760278162464835
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2526597662633733827}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 52aa6c5ffa63f9e459fa44257f8b7a39, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &6786747655620580224
 GameObject:
   m_ObjectHideFlags: 0

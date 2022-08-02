@@ -41,6 +41,8 @@ public class PlayerController : MonoBehaviour
     //Death
     private bool isDead = false;
 
+    //Animator
+    [SerializeField] Animator animator;
 
     void Start()
     {
@@ -104,14 +106,14 @@ public class PlayerController : MonoBehaviour
         var number = Random.Range(1, 100);
         if (number <= 33)
         {
-            CoinMagnet();
+            Accelerate();
         }
         else if (number > 33 && number <= 66)
         {
             Accelerate();
         }
         else {
-            Slow();
+            Accelerate();
         }
     }
     private void CoinMagnet() {
@@ -119,10 +121,24 @@ public class PlayerController : MonoBehaviour
         coinCatch.GetComponent<CircleCollider2D>().radius = 2f;
     }
     private void Accelerate() {
-        accelerateActive = true;
+        if (!accelerateActive)
+        {
+            accelerateActive = true;
+        }
+        else {
+            accelerateActive = false;
+        }
+        animator.SetTrigger("Fast");
     }
     private void Slow() {
-        slowActive = true;
+        if (!slowActive)
+        {
+            slowActive = true;
+        }
+        else {
+            slowActive = false;
+        }
+        animator.SetTrigger("Slow");
     }
     private void BoostController() {
         if (duringBoost) {
@@ -135,11 +151,11 @@ public class PlayerController : MonoBehaviour
                 duringBoost = false;
                 if (accelerateActive)
                 {
-                    accelerateActive = false;
+                    Accelerate();
                 }
                 else if (slowActive)
                 {
-                    slowActive = false;
+                    Slow();
                 }
                 else {
                     magnetActive = false;
