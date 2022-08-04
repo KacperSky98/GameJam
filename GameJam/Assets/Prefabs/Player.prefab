@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 1138591632188741253}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.75, y: 1.75, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8808048187966613338}
@@ -66,9 +66,9 @@ GameObject:
   - component: {fileID: 8808048187966613338}
   - component: {fileID: 5894393487817720041}
   - component: {fileID: 1134519130317200381}
-  - component: {fileID: 351237446051757392}
   - component: {fileID: 7799880340869475208}
   - component: {fileID: 7377760278162464835}
+  - component: {fileID: 929614281002768698}
   m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
@@ -156,12 +156,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseFallingSpeed: -10
-  maxFallingSpeed: -50
+  maxFallingSpeed: -35
   valueOfIncreasingSpeed: 1.5
-  movementSpeed: 13
+  movementSpeed: 25
   maxCoins: 0
   collectedCoins: 0
-  coinsForUpgrade: 5
+  coinsForUpgrade: 10
   currentCoinsForUpgrade: 0
   duringBoost: 0
   slowActive: 0
@@ -169,34 +169,9 @@ MonoBehaviour:
   accelerateActive: 0
   coinCatch: {fileID: 8609454363005118111}
   deathScreen: {fileID: 0}
+  deathAndVictoryScreen: {fileID: 0}
   animator: {fileID: 7377760278162464835}
   slowValue: 0.3
---- !u!61 &351237446051757392
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2526597662633733827}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
 --- !u!111 &7799880340869475208
 Animation:
   m_ObjectHideFlags: 0
@@ -232,6 +207,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!58 &929614281002768698
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2526597662633733827}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.3
 --- !u!1 &6786747655620580224
 GameObject:
   m_ObjectHideFlags: 0
@@ -293,4 +284,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.35
+  m_Radius: 0.3

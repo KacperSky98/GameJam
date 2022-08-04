@@ -75,7 +75,7 @@ public class PlayerController : MonoBehaviour
     private void Falling() {
         if (accelerateActive)
         {
-            realFallingSpeed = baseFallingSpeed * 1.3f;
+            realFallingSpeed = baseFallingSpeed * 1.2f;
         }
         else if (slowActive)
         {
@@ -113,15 +113,14 @@ public class PlayerController : MonoBehaviour
     }
     public void SetBoost() {
         duringBoost = true;
-        //Tu dzieje si� magia 
         var number = Random.Range(1, 100);
-        if (number <= 33)
-        {
-            Accelerate();
-        }
-        else if (number > 33 && number <= 66)
+        if (number <= 15)
         {
             Slow();
+        }
+        else if (number > 15 && number <= 56)
+        {
+            Accelerate();
         }
         else {
             CoinMagnet();
@@ -131,11 +130,11 @@ public class PlayerController : MonoBehaviour
         if (!magnetActive)
         {
             magnetActive = true;
-            coinCatch.GetComponent<CircleCollider2D>().radius = 1f;
+            coinCatch.GetComponent<CircleCollider2D>().radius = 0.6f;
         }
         else {
             magnetActive = false;
-            coinCatch.GetComponent<CircleCollider2D>().radius = 0.35f;
+            coinCatch.GetComponent<CircleCollider2D>().radius = 0.3f;
         }
         animator.SetTrigger("Magnet");
     }
@@ -220,6 +219,7 @@ public class PlayerController : MonoBehaviour
             SaveHighScore();
             deathAndVictoryScreen.text = "Game Over";
             isDead = true;
+            this.gameObject.GetComponent<CircleCollider2D>().enabled = false;
             rb.velocity = new Vector3(0f, 0f, 0f);
             deathScreen.SetActive(true);
             deathScreen.GetComponent<Animator>().enabled = true;
@@ -232,6 +232,7 @@ public class PlayerController : MonoBehaviour
             SaveHighScore();
             deathAndVictoryScreen.text = "\"Victory\"";
             isDead = true;
+            this.gameObject.GetComponent<CircleCollider2D>().enabled = false;
             rb.velocity = new Vector3(0f, 0f, 0f);
             deathScreen.SetActive(true);
             deathScreen.GetComponent<Animator>().enabled = true;

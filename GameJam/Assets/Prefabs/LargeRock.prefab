@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FallingSpeed: -5
-  maxFallingSpeed: -50
+  maxFallingSpeed: -35
   valueOfIncreasingSpeed: 1.5
   rb: {fileID: 8429360364314992684}
 --- !u!50 &8429360364314992684

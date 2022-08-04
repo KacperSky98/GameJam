@@ -35,7 +35,8 @@ public class DeathScreenController : MonoBehaviour
         Time.timeScale = 0;
     }
     public void BackToMenu() {
-        SceneManager.LoadScene("Menu", LoadSceneMode.Single);
+        Time.timeScale = 1;
+        SceneManager.LoadScene(0, LoadSceneMode.Single);
     }
     public void Retry()
     {
