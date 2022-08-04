@@ -9,6 +9,7 @@ TagManager:
   - Accelerate
   - Bounce
   - Coin
+  - Win
   layers:
   - Default
   - TransparentFX
