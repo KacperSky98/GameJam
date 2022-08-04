@@ -159,6 +159,7 @@ MonoBehaviour:
   maxFallingSpeed: -50
   valueOfIncreasingSpeed: 1.5
   movementSpeed: 13
+  maxCoins: 0
   collectedCoins: 0
   coinsForUpgrade: 5
   currentCoinsForUpgrade: 0
@@ -167,7 +168,7 @@ MonoBehaviour:
   magnetActive: 0
   accelerateActive: 0
   coinCatch: {fileID: 8609454363005118111}
-  deathScreen: {fileID: 6319577808619662059, guid: 690500bea93fcdc468e41831a37dd152, type: 3}
+  deathScreen: {fileID: 0}
   animator: {fileID: 7377760278162464835}
   slowValue: 0.3
 --- !u!61 &351237446051757392

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -16,7 +17,7 @@ public class PlayerController : MonoBehaviour
     private float horizontalMove = 0f;
 
     //Coins
-    private int maxCoins = 0;
+    public int maxCoins = 0;
     public int collectedCoins = 0;
     public int coinsForUpgrade = 5;
     public int currentCoinsForUpgrade;
@@ -41,6 +42,7 @@ public class PlayerController : MonoBehaviour
     //Death
     private bool isDead = false;
     [SerializeField] private GameObject deathScreen;
+    [SerializeField] private Text deathAndVictoryScreen;
 
     //Animator
     [SerializeField] Animator animator;
@@ -193,6 +195,18 @@ public class PlayerController : MonoBehaviour
             }            
         }
     }
+    public void SaveHighScore() {
+        HighScoreData data = HighScoreSystem.LoadHighScore();
+        if (data == null)
+        {
+            HighScoreSystem.SaveHighScore(this);
+        }
+        else {
+            if (data.collectedCoins < collectedCoins) {
+                HighScoreSystem.SaveHighScore(this);
+            }
+        }
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         Debug.Log("Kolizja");
@@ -203,6 +217,8 @@ public class PlayerController : MonoBehaviour
             }        
         }
         if (other.CompareTag("Stop")) {
+            SaveHighScore();
+            deathAndVictoryScreen.text = "Game Over";
             isDead = true;
             rb.velocity = new Vector3(0f, 0f, 0f);
             deathScreen.SetActive(true);
@@ -211,6 +227,15 @@ public class PlayerController : MonoBehaviour
         }
         if (other.CompareTag("Slow")) {
             onSlowTerrain = true;    
+        }
+        if (other.CompareTag("Win")) {
+            SaveHighScore();
+            deathAndVictoryScreen.text = "\"Victory\"";
+            isDead = true;
+            rb.velocity = new Vector3(0f, 0f, 0f);
+            deathScreen.SetActive(true);
+            deathScreen.GetComponent<Animator>().enabled = true;
+            Debug.Log("Win");
         }
     }
     private void OnTriggerExit2D(Collider2D other) {
