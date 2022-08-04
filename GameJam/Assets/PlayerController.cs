@@ -109,7 +109,7 @@ public class PlayerController : MonoBehaviour
     }
     public void SetBoost() {
         duringBoost = true;
-        //Tu dzieje siê magia 
+        //Tu dzieje siï¿½ magia 
         var number = Random.Range(1, 100);
         if (number <= 33)
         {
@@ -203,12 +203,12 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("Stop")) {
             Debug.Log("GameOver");        
         }
-        if (other.CompareTag("SlowTerrain")) {
+        if (other.CompareTag("Slow")) {
             onSlowTerrain = true;    
         }
     }
     private void OnTriggerExit2D(Collider2D other) {
-        if (other.CompareTag("SlowTerrain"))
+        if (other.CompareTag("Slow"))
         {
             onSlowTerrain = false;
         }
