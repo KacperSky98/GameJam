@@ -39,6 +39,6 @@ public class DeathScreenController : MonoBehaviour
     }
     public void Retry()
     {
-        SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
+        SceneManager.LoadScene(1, LoadSceneMode.Single);
     }
 }
