@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
 
     //Death
     private bool isDead = false;
+    [SerializeField] private GameObject deathScreen;
 
     //Animator
     [SerializeField] Animator animator;
@@ -50,6 +51,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1;
         currentCoinsForUpgrade = coinsForUpgrade;
         rb = gameObject.GetComponentInParent< Rigidbody2D>();
         rb.gravityScale = 0f;
@@ -201,6 +203,10 @@ public class PlayerController : MonoBehaviour
             }        
         }
         if (other.CompareTag("Stop")) {
+            isDead = true;
+            rb.velocity = new Vector3(0f, 0f, 0f);
+            deathScreen.SetActive(true);
+            deathScreen.GetComponent<Animator>().enabled = true;
             Debug.Log("GameOver");        
         }
         if (other.CompareTag("Slow")) {
