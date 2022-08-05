@@ -130,7 +130,7 @@ public class PlayerController : MonoBehaviour
         if (!magnetActive)
         {
             magnetActive = true;
-            coinCatch.GetComponent<CircleCollider2D>().radius = 0.6f;
+            coinCatch.GetComponent<CircleCollider2D>().radius = 0.8f;
         }
         else {
             magnetActive = false;
